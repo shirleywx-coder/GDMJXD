@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>粤美境</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== 顶部Logo栏 ========== */
+    .header {
+      background: #e8f5e9;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      height: 30px;
+      width: auto;
+    }
+
+    /* ========== 通用卡片 ========== */
+    .section-card {
+      background: #fff;
+      margin: 10px 12px;
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: linear-gradient(180deg, #66bb6a, #42a5f5);
+      border-radius: 2px;
+      margin-right: 6px;
+    }
+
+    /* ========== 首页 Banner ========== */
+    .home-banner {
+      background: linear-gradient(135deg, #4db6ac 0%, #81c784 50%, #64b5f6 100%);
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+    }
+
+    .banner-content { position: relative; }
+
+    .banner-title {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .banner-sub {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.95);
+      margin-top: 6px;
+    }
+
+    .banner-source {
+      display: block;
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ========== 数据统计 ========== */
+    .stats-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 18px 10px;
+      background: #fff;
+      margin: -18px 12px 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      margin-top: 3px;
+    }
+
+    /* ========== 活动参考信息 ========== */
+    .intro-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .intro-p {
+      display: block;
+      margin-bottom: 8px;
+      text-indent: 2em;
+    }
+
+    .intro-logo {
+      width: 160px;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .bold { font-weight: 700; }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: linear-gradient(135deg, #e8f5e9, #dcedc8);
+      color: #2e7d32;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ========== 项目历程 ========== */
+    .history-text .intro-p {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* ========== 往届回顾 ========== */
+    .past-item {
+      margin-bottom: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f9f9f9;
+    }
+
+    .past-item:last-child { margin-bottom: 0; }
+
+    .past-photo {
+      width: 100%;
+      height: 160px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .past-content { padding: 12px; }
+
+    .past-title {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .past-desc {
+      display: block;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .past-highlight {
+      color: #d32f2f;
+      font-weight: 700;
+    }
+
+    .past-btn {
+      display: inline-flex;
+      background: linear-gradient(135deg, #66bb6a, #42a5f5);
+      padding: 8px 18px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(102,187,106,0.35);
+      float: right;
+      margin-top: 6px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+
+    .past-btn-text {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .link-btn {
+      background: linear-gradient(135deg, #66bb6a, #42a5f5);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(102,187,106,0.35);
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      text-decoration: none;
+      display: block;
+    }
+
+    .link-btn-text {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .link-url {
+      display: block;
+      font-size: 11px;
+      color: #999;
+      margin-top: 7px;
+      text-align: center;
+      word-break: break-all;
+    }
+
+    /* ========== 活动细则页 ========== */
+    .rules-banner {
+      background: linear-gradient(135deg, #66bb6a 0%, #42a5f5 100%);
+      padding: 18px 16px;
+      text-align: center;
+    }
+
+    .rules-banner-title {
+      display: block;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .rules-banner-sub {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      margin-top: 5px;
+    }
+
+    .rule-section {
+      background: #fff;
+      margin: 10px 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .rule-header {
+      padding: 14px 15px;
+      background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rule-header-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b5e20;
+    }
+
+    .rule-arrow {
+      font-size: 12px;
+      color: #66bb6a;
+      transition: transform 0.3s;
+    }
+
+    .rule-arrow.open { transform: rotate(0deg); }
+
+    .rule-body {
+      padding: 14px 15px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      display: none;
+    }
+
+    .rule-body.open { display: block; }
+
+    .rule-p {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .rule-sub-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    .rule-list {
+      margin-left: 10px;
+      margin-bottom: 8px;
+    }
+
+    .rule-li {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    /* Highlight boxes */
+    .highlight-box {
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin: 6px 0;
+    }
+
+    .highlight-box.green {
+      background: #e8f5e9;
+      border-left: 3px solid #43a047;
+    }
+
+    .highlight-box.blue {
+      background: #e3f2fd;
+      border-left: 3px solid #42a5f5;
+    }
+
+    .highlight-box.orange {
+      background: #fff3e0;
+      border-left: 3px solid #fb8c00;
+    }
+
+    .highlight-box.warn {
+      background: #ffebee;
+      border-left: 3px solid #ef5350;
+    }
+
+    .highlight-title {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .highlight-desc {
+      display: block;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .rule-notice-box {
+      background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 8px 0;
+      border-left: 3px solid #43a047;
+    }
+
+    .rule-notice-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+
+    .rule-notice-desc {
+      display: block;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(180deg, #66bb6a, #42a5f5);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -19px;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      background: #66bb6a;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #66bb6a;
+    }
+
+    .timeline-date {
+      display: block;
+      font-weight: 700;
+      color: #2e7d32;
+      font-size: 13px;
+    }
+
+    .timeline-desc {
+      display: block;
+      color: #555;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    /* ========== 参与信息页 ========== */
+    .submit-banner {
+      background: linear-gradient(135deg, #66bb6a 0%, #42a5f5 100%);
+      padding: 18px 16px;
+      text-align: center;
+    }
+
+    .submit-banner-title {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .submit-banner-sub {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.95);
+      margin-top: 4px;
+    }
+
+    .submit-list { padding: 14px 14px 0; }
+
+    .submit-card {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+    }
+
+    .submit-card.plan::before { background: linear-gradient(180deg, #66bb6a, #43a047); }
+    .submit-card.protect::before { background: linear-gradient(180deg, #42a5f5, #1e88e5); }
+    .submit-card.speak::before { background: linear-gradient(180deg, #ffa726, #fb8c00); }
+
+    .card-right {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .submit-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .submit-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .submit-deadline {
+      font-size: 10px;
+      font-weight: 600;
+      color: #d32f2f;
+      background: #fce4ec;
+      padding: 1px 5px;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    .submit-desc {
+      display: block;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 7px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.5;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2px;
+    }
+
+    .countdown-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #666;
+      background: #f5f5f5;
+    }
+
+    .submit-btn {
+      display: inline-flex;
+      padding: 7px 24px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .plan-btn { background: linear-gradient(135deg, #66bb6a, #43a047); }
+    .protect-btn { background: linear-gradient(135deg, #42a5f5, #1e88e5); }
+    .speak-btn { background: linear-gradient(135deg, #ffa726, #fb8c00); }
+
+    .submit-btn-text {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* 咨询卡片 */
+    .contact-card {
+      background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+      margin: 4px 12px 12px;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .contact-title {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 8px;
+    }
+
+    .contact-item {
+      display: block;
+      font-size: 14px;
+      color: #444;
+      margin: 5px 0;
+    }
+
+    .contact-wx {
+      display: inline-flex;
+      background: #2e7d32;
+      padding: 5px 16px;
+      border-radius: 15px;
+      margin-top: 6px;
+    }
+
+    .contact-wx-text {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .contact-qrcode {
+      width: 120px;
+      height: 120px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 10px;
+    }
+
+    .contact-qrcode-label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    /* ========== 我的页面 ========== */
+    .user-header {
+      background: linear-gradient(135deg, #66bb6a 0%, #42a5f5 100%);
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .user-avatar-wrap {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.6);
+      overflow: hidden;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+
+    .user-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-name {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .user-desc {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      margin-top: 4px;
+    }
+
+    /* 提交记录列表 */
+    .record-list { margin-top: 4px; }
+
+    .record-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 6px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+    }
+
+    .record-item:last-child { border-bottom: none; }
+
+    .record-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .plan-dot { background: #66bb6a; }
+    .protect-dot { background: #42a5f5; }
+    .speak-dot { background: #ffa726; }
+
+    .record-info { flex: 1; }
+
+    .record-name {
+      font-size: 15px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .record-arrow {
+      font-size: 18px;
+      color: #ccc;
+      margin-left: 8px;
+    }
+
+    /* 关于 */
+    .about-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* 免责声明 */
+    .disclaimer-card {
+      background: #fff;
+      margin: 12px;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .disclaimer-text {
+      font-size: 12px;
+      color: #999;
+      line-height: 1.8;
+    }
+
+    /* ========== 底部TabBar ========== */
+    .tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 200;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 4px 0;
+      flex: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab-icon {
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+
+    .tab-label {
+      font-size: 10px;
+      color: #999;
+    }
+
+    .tab-item.active .tab-label {
+      color: #43a047;
+      font-weight: 600;
+    }
+
+    /* ========== 页面容器 ========== */
+    .page { display: none; }
+    .page.active { display: block; padding-bottom: 70px; }
+
+    /* ========== Toast ========== */
+    .toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 9999;
+      display: none;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .toast.show { display: block; }
+
+    /* ========== 清除浮动 ========== */
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== 首页 ==================== -->
+  <div class="page active" id="page-home">
+    <!-- 顶部Logo -->
+    <div class="header">
+      <img src="images/logo-combined.png" class="header-logo" alt="Logo">
+    </div>
+
+    <!-- Banner -->
+    <div class="home-banner">
+      <div class="banner-content">
+        <span class="banner-title">美境行动</span>
+        <span class="banner-sub">美源于心，境成于行</span>
+        <span class="banner-source">信息来源：生态环境教育服务平台</span>
+      </div>
+    </div>
+
+    <!-- 数据统计 -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">1996年</span>
+        <span class="stat-label">项目启动</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">覆盖省市</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100万+</span>
+        <span class="stat-label">参与学生</span>
+      </div>
+    </div>
+
+    <!-- 活动参考信息 -->
+    <div class="section-card">
+      <div class="section-title">活动简介</div>
+      <div class="intro-text">
+        <span class="intro-p">"美境行动"是壳牌中国自1996年发起并资助的青少年环保实践教育项目，旨在增强青少年环保意识、培养环保行为与责任感。</span>
+        <img src="images/logo-mj.png" class="intro-logo" alt="美境行动">
+        <span class="intro-p">项目以"美源于心，境成于行"为理念，全年活动分为方案设计、项目实施两大核心阶段，同步配套师生校内外主题活动，引导青少年发现身边环境问题，自主设计环保方案并落地实践，用所学知识改善周边环境；同时通过"小手拉大手"的形式，以青少年行动带动家长参与，放大环保影响，实现家校协同、共建绿色家园的目标。</span>
+      </div>
+      <div class="tag-list">
+        <span class="tag">废弃物的利用</span>
+        <span class="tag">生态保护</span>
+        <span class="tag">绿色消费</span>
+        <span class="tag">STEM思维</span>
+        <span class="tag">科技创新</span>
+      </div>
+    </div>
+
+    <!-- 项目历程 -->
+    <div class="section-card">
+      <div class="section-title">项目历程</div>
+      <div class="history-text">
+        <span class="intro-p"><b>1996年</b> — 美境行动首次在广州启动，收到积极反馈。</span>
+        <span class="intro-p"><b>1998年</b> — 推广至北京、上海、广州三地中小学。</span>
+        <span class="intro-p"><b>2019年</b> — 扩展至30余个省市，参与学生超百万。</span>
+        <span class="intro-p">合作伙伴涵盖生态环境部门、教委、环保局、科协及民间环保组织等。</span>
+      </div>
+    </div>
+
+    <!-- 往届回顾 -->
+    <div class="section-card">
+      <div class="section-title">往届回顾</div>
+
+      <!-- 第二十七届 -->
+      <div class="past-item">
+        <img class="past-photo" src="images/past27.jpg" alt="第二十七届">
+        <div class="past-content clearfix">
+          <span class="past-title">第二十七届广东省青少年"美境行动"</span>
+          <span class="past-desc">面向全省大中小学（含职高、高职）广泛征集作品，参与规模稳步扩大。活动共吸引 <span class="past-highlight">118所</span> 学校及相关机构参与，覆盖学生 <span class="past-highlight">1,277人次</span>、教师 <span class="past-highlight">682人次</span>，作品征集总数 <span class="past-highlight">648份</span>。</span>
+          <a class="past-btn" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU2OTkxMTk5OA==&action=getalbum&album_id=3954914700546015233#wechat_redirect" target="_blank">
+            <span class="past-btn-text">查看第二十七届更多内容</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 第二十六届 -->
+      <div class="past-item">
+        <img class="past-photo" src="images/past26.jpg" alt="第二十六届">
+        <div class="past-content clearfix">
+          <span class="past-title">第二十六届广东省青少年"美境行动"</span>
+          <span class="past-desc">首次在全省范围内接收作品，共收到来自近十个地市、近百所单位的作品。2024年广东片区美境行动共收到 <span class="past-highlight">461份</span> 作品，开展了 <span class="past-highlight">23场</span> 线下宣讲与培训活动，涵盖校园、企业、社区及乡村。</span>
+          <a class="past-btn" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU2OTkxMTk5OA==&action=getalbum&album_id=4556437633349926917#wechat_redirect" target="_blank">
+            <span class="past-btn-text">查看第二十六届更多内容</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 全国美境行动 -->
+    <div class="section-card">
+      <div class="section-title">全国美境行动</div>
+      <span class="intro-p">2026年度全国美境行动通知暂未公布，敬请关注。</span>
+      <a class="link-btn" href="https://naturesch.cn/indexController.do?mjxdInfoJs" target="_blank" style="text-decoration:none;display:block;">
+        <span class="link-btn-text">访问全国美境行动</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================== 活动细则 ==================== -->
+  <div class="page" id="page-rules">
+    <!-- 顶部Logo -->
+    <div class="header">
+      <img src="images/logo-combined.png" class="header-logo" alt="Logo">
+    </div>
+
+    <!-- Banner -->
+    <div class="rules-banner">
+      <span class="rules-banner-title">第二十八届广东省青少年壳牌"美境行动"</span>
+      <span class="rules-banner-sub">活动细则</span>
+      <span class="banner-source">信息来源：粤美境公众号</span>
+    </div>
+
+    <!-- 一、组织机构 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">一、组织机构</span>
+        <span class="rule-arrow open">▼</span>
+      </div>
+      <div class="rule-body open">
+        <span class="rule-p"><b>指导单位：</b>生态环境部宣传教育中心</span>
+        <span class="rule-p"><b>主办单位：</b>华南师范大学环境学院环境教育中心</span>
+        <span class="rule-p"><b>支持单位：</b>壳牌（中国）有限公司</span>
+      </div>
+    </div>
+
+    <!-- 二、参与对象 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">二、参与对象</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <span class="rule-p">广东省内大中小学（包括职高、高职）在校学生个人或团体（包括小组、班级、年级、学校及各类校外教育单位等）均可报名参加。</span>
+        <span class="rule-p">活动鼓励以学校统一推荐的方式提交项目设计方案和实施报告，主办方将根据学校推进项目开展、报送方案质量和数量等评选优秀组织单位。</span>
+      </div>
+    </div>
+
+    <!-- 三、活动主题 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">三、活动主题</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <span class="rule-p">以身边的人、事、家庭、学校、社区、生态环境为素材，联系大气、水体、土壤、生物多样性、低碳生活、节能减排、气候变化、海洋环境保护等相关环境主题；以身边环境问题与观察、环保行动与创新实践、全球环保挑战与合作为选题，提出并实施涵盖自然观察、创意宣传、调查研究、社会实践、科技创新等领域且可落地的方案。</span>
+        <span class="rule-p" style="margin-top:8px;font-weight:700;">本届活动重点倡导以下三个方向：</span>
+        <div class="highlight-box green">
+          <span class="highlight-title">🌱 绿色科技行动者</span>
+          <span class="highlight-desc">聚焦科技与生态的融合，鼓励用创新思维解决身边的环境问题</span>
+        </div>
+        <div class="highlight-box blue">
+          <span class="highlight-title">🌊 海洋蓝碳守护者</span>
+          <span class="highlight-desc">立足广东海洋特色，引导青少年关注蓝色国土，守护湿地与海洋生态</span>
+        </div>
+        <div class="highlight-box orange">
+          <span class="highlight-title">♻️ 无废城市践行者</span>
+          <span class="highlight-desc">助力无废城市建设，倡导从校园到社区的每一份资源循环行动</span>
+        </div>
+        <span class="rule-p" style="margin-top:8px;">参赛项目可根据自身特色选择相应方向，亦可围绕其他生态环境议题开展实践。三个方向将分别设立主题奖。</span>
+      </div>
+    </div>
+
+    <!-- 四、活动形式及要求 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">四、活动形式及要求</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <span class="rule-p">美境行动设置<b>小学、初中、高中、职高（含中专）、大学组、高职</b>六个组别，方案将由主办方进行分类收集。</span>
+        <span class="rule-p">项目属性包括：自然观察、创意宣传、调查研究、社会实践、科技创新等。</span>
+        <span class="rule-p">学生自主设计实施，教师仅作辅助，同一项目组学生不超过8人，指导教师申报数不超过3人。</span>
+
+        <div class="rule-notice-box">
+          <span class="rule-notice-title">📌 活动分为方案设计与项目实施两个阶段：</span>
+          <span class="rule-notice-desc">所有参赛项目须先提交"划"美境设计方案（主办方将进行初评），设计方案提交后即可同步开展实施工作，无需等待评审结果；已提交设计方案的项目组，可于实施后继续提交"护"美境实施报告或"说"美境作品（仅限中小学组）参与评审。</span>
+        </div>
+
+        <span class="rule-sub-title">（一）"划"美境设计方案</span>
+        <div class="rule-list">
+          <span class="rule-li">• 所有组别需提交设计方案</span>
+          <span class="rule-li">• 电子文档不超过5页</span>
+          <span class="rule-li">• 突出计划性和可实施性</span>
+          <span class="rule-li">• 包含：项目意义、内容简介、项目计划（步骤、方法、时间节点及预期成果）、经费预算</span>
+        </div>
+
+        <span class="rule-sub-title">（二）"护"美境实施报告</span>
+        <div class="rule-list">
+          <span class="rule-li">• 实施报告电子文档不超过12页，图示不超过5页</span>
+          <span class="rule-li">• 原则上字数不超过5000字</span>
+          <span class="rule-li">• 实施过程需留存文字日志、数据图表、影像资料，确保可追溯</span>
+          <span class="rule-li">• 包括：方案介绍、实施过程、实施成果、经费支出</span>
+        </div>
+
+        <span class="rule-sub-title">（三）"说"美境作品（仅限中小学组）</span>
+        <div class="rule-list">
+          <span class="rule-li"><b>视频：</b>横屏16:9的MP4格式，清晰度不低于720p；需发布在社交媒体，添加话题标签#广东美境行动#；评审阶段仅提交作品发布链接</span>
+          <span class="rule-li"><b>自然笔记 / 绘画：</b>以JPEG或PNG格式图片提交，分辨率不低于300dpi，单文件不超过50M</span>
+          <span class="rule-li"><b>绘本：</b>包含封面和5-10幅内页图画；逐页扫描合并为单个PDF，大小不超过100M</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 五、活动计划时间表 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">五、活动计划时间表</span>
+        <span class="rule-arrow open">▼</span>
+      </div>
+      <div class="rule-body open">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2026年9月20日前</span>
+            <span class="timeline-desc">"划"美境设计方案提交截止</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2026年9月下旬</span>
+            <span class="timeline-desc">"划"美境设计方案评优</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2026年11月1日前</span>
+            <span class="timeline-desc">"护"美境实施报告和"说"美境作品提交截止</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2026年11月中旬</span>
+            <span class="timeline-desc">"护"美境实施报告、"说"美境作品评优</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2026年12月底</span>
+            <span class="timeline-desc">推荐优秀作品参加国家级评选</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">2027年3月中旬或4月上旬</span>
+            <span class="timeline-desc">线下颁奖和新一届启动仪式，展示活动成果</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">全年不定期</span>
+            <span class="timeline-desc">教师研讨会、学生交流营（线上/线下）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 六、奖项设置 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">六、奖项设置</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <span class="rule-sub-title">（一）学生项目奖</span>
+        <div class="rule-list">
+          <span class="rule-li">• "划"美境设计方案、"护"美境实施报告和"说"美境作品分类评选</span>
+          <span class="rule-li">• 设特等奖、一等奖、二等奖、三等奖若干</span>
+          <span class="rule-li">• 特等奖、一等奖、二等奖项目将获得奖金支持</span>
+        </div>
+
+        <span class="rule-sub-title">（二）三大主题奖</span>
+        <div class="rule-list">
+          <span class="rule-li">• "绿色科技行动者""海洋蓝碳守护者""无废城市践行者"各评选一项</span>
+          <span class="rule-li">• 结合评审专家评分综合评定</span>
+          <span class="rule-li">• 颁发证书及奖金</span>
+        </div>
+
+        <span class="rule-sub-title">（三）优秀指导教师奖</span>
+        <span class="rule-p">对应学生项目获奖情况评选，颁发证书。</span>
+
+        <span class="rule-sub-title">（四）优秀组织奖</span>
+        <span class="rule-p">综合考量各单位在活动推广、方案报送、学生指导等方面的组织成效，颁发荣誉证书。</span>
+      </div>
+    </div>
+
+    <!-- 七、核心要求与特别说明 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">七、核心要求与特别说明</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <div class="highlight-box warn">
+          <span class="highlight-desc">⚠️ 往届已获同类型、同级别奖项的作品，不再参加本年度（2026）评选</span>
+        </div>
+        <span class="rule-p" style="margin-top:8px;font-weight:700;">STEM理念融合：</span>
+        <span class="rule-p">鼓励运用科学、技术、工程、数学等多学科知识解决真实问题；大学组需体现跨学科整合。</span>
+        <span class="rule-p" style="font-weight:700;">学生自主性：</span>
+        <span class="rule-p">方案设计、实施、记录需由学生主导完成，教师/家长仅提供方法论指导与安全保障，严禁代劳。</span>
+        <span class="rule-p" style="font-weight:700;">议题聚焦性：</span>
+        <span class="rule-p">鼓励围绕绿色科技、海洋蓝碳、无废城市等议题展开活动，并在报告中分析其社会/生态价值。</span>
+        <span class="rule-p" style="font-weight:700;">原创性与权责：</span>
+        <span class="rule-p">严禁抄袭，引用外部资源需标注来源，违规者取消资格并承担法律责任；主办单位拥有对参与项目的复制、展览、宣传、发表、出版等权利，作者享有署名权。</span>
+      </div>
+    </div>
+
+    <!-- 八、参与方式 -->
+    <div class="rule-section">
+      <div class="rule-header" onclick="toggleSection(this)">
+        <span class="rule-header-text">八、参与方式</span>
+        <span class="rule-arrow">▼</span>
+      </div>
+      <div class="rule-body">
+        <span class="rule-p" style="font-weight:700;">1. 资料下载</span>
+        <span class="rule-p">请各地相关单位、学校广泛发动，组织师生通过粤美境公众号查看活动细则。</span>
+        <span class="rule-p" style="font-weight:700;margin-top:8px;">2. 活动申报</span>
+        <span class="rule-p">通过粤美境公众号申报入口线上填写申报表提交作品。</span>
+        <span class="rule-p" style="font-weight:700;margin-top:8px;">3. 活动联系</span>
+        <span class="rule-p">联系人：华南师范大学环境教育中心</span>
+        <span class="rule-p">微信：GDMJXD</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 参与信息 ==================== -->
+  <div class="page" id="page-submit">
+    <!-- 顶部Logo -->
+    <div class="header">
+      <img src="images/logo-combined.png" class="header-logo" alt="Logo">
+    </div>
+
+    <!-- Banner -->
+    <div class="submit-banner">
+      <span class="submit-banner-title">作品提交</span>
+      <span class="submit-banner-sub">第二十八届广东省青少年壳牌"美境行动"</span>
+      <span class="banner-source">信息来源：粤美境公众号</span>
+    </div>
+
+    <!-- 三个等高卡片 -->
+    <div class="submit-list">
+      <!-- 划 -->
+      <div class="submit-card plan">
+        <div class="card-right">
+          <div class="submit-title-row">
+            <span class="submit-title">"划"美境设计方案</span>
+            <span class="submit-deadline">截止 2026年9月20日 23:59</span>
+          </div>
+          <span class="submit-desc">适用于所有组别（小学/中学/大学）| 电子文档不超过5页 | 提交后不可修改</span>
+          <div class="card-bottom">
+            <span class="countdown-tag" id="plan-remain"></span>
+            <button class="submit-btn plan-btn" onclick="openWpsLink('nVuE6fng','划美境设计方案')">
+              <span class="submit-btn-text">立即填写</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 护 -->
+      <div class="submit-card protect">
+        <div class="card-right">
+          <div class="submit-title-row">
+            <span class="submit-title">"护"美境实施报告</span>
+            <span class="submit-deadline">截止 2026年11月1日 23:59</span>
+          </div>
+          <span class="submit-desc">适用于已提交方案并实施的小组 | 报告不超过12页 | 字数不超过5000字 | 需包含实施过程与成果</span>
+          <div class="card-bottom">
+            <span class="countdown-tag" id="protect-remain"></span>
+            <button class="submit-btn protect-btn" onclick="openWpsLink('YjzS2MMn','护美境实施报告')">
+              <span class="submit-btn-text">立即填写</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 说 -->
+      <div class="submit-card speak">
+        <div class="card-right">
+          <div class="submit-title-row">
+            <span class="submit-title">"说"美境作品</span>
+            <span class="submit-deadline">截止 2026年11月1日 23:59</span>
+          </div>
+          <span class="submit-desc">仅限已提交方案的中小学组参与 | 形式包括视频/自然笔记/绘画/绘本等 | 作品需体现美境行动理念</span>
+          <div class="card-bottom">
+            <span class="countdown-tag" id="speak-remain"></span>
+            <button class="submit-btn speak-btn" onclick="openWpsLink('AIVTHGjm','说美境作品')">
+              <span class="submit-btn-text">立即填写</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 活动咨询 -->
+    <div class="contact-card">
+      <span class="contact-title">📞 活动咨询</span>
+      <span class="contact-item">联系人：华南师范大学环境教育中心</span>
+      <span class="contact-item">微信公众号：粤美境</span>
+      <div class="contact-wx">
+        <span class="contact-wx-text">微信：GDMJXD</span>
+      </div>
+      <div style="margin-top:10px;"></div>
+      <img src="images/qrcode-wx.png" class="contact-qrcode" alt="二维码">
+      <span class="contact-qrcode-label">长按保存二维码加群</span>
+    </div>
+  </div>
+
+  <!-- ==================== 我的 ==================== -->
+  <div class="page" id="page-mine">
+    <!-- 用户信息区 -->
+    <div class="user-header">
+      <div class="user-avatar-wrap">
+        <img class="user-avatar" src="images/logo-mj.png" alt="头像">
+      </div>
+      <span class="user-name">美境行动参与者</span>
+      <span class="user-desc">美境行动信息平台</span>
+    </div>
+
+    <!-- 我的提交记录 -->
+    <div class="section-card">
+      <div class="section-title">我的提交记录</div>
+      <div class="record-list">
+        <div class="record-item" onclick="openWpsLink('nVuE6fng','划美境设计方案')">
+          <div class="record-dot plan-dot"></div>
+          <div class="record-info">
+            <span class="record-name">"划"美境设计方案</span>
+          </div>
+          <span class="record-arrow">›</span>
+        </div>
+        <div class="record-item" onclick="openWpsLink('YjzS2MMn','护美境实施报告')">
+          <div class="record-dot protect-dot"></div>
+          <div class="record-info">
+            <span class="record-name">"护"美境实施报告</span>
+          </div>
+          <span class="record-arrow">›</span>
+        </div>
+        <div class="record-item" onclick="openWpsLink('AIVTHGjm','说美境作品')">
+          <div class="record-dot speak-dot"></div>
+          <div class="record-info">
+            <span class="record-name">"说"美境作品</span>
+          </div>
+          <span class="record-arrow">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 关于 -->
+    <div class="section-card">
+      <div class="section-title">关于</div>
+      <span class="about-text">本网页用于第二十八届广东省青少年壳牌"美境行动"活动信息展示与提交入口指引。</span>
+    </div>
+
+    <!-- 去掉免责声明，H5不需要 -->
+    <div style="display:none;"></div>
+  </div>
+
+  <!-- ==================== 底部TabBar ==================== -->
+  <div class="tab-bar">
+    <div class="tab-item active" onclick="switchTab('home', this)">
+      <span class="tab-icon">🏠</span>
+      <span class="tab-label">首页</span>
+    </div>
+    <div class="tab-item" onclick="switchTab('rules', this)">
+      <span class="tab-icon">📋</span>
+      <span class="tab-label">活动细则</span>
+    </div>
+    <div class="tab-item" onclick="switchTab('submit', this)">
+      <span class="tab-icon">📝</span>
+      <span class="tab-label">作品提交</span>
+    </div>
+    <div class="tab-item" onclick="switchTab('mine', this)">
+      <span class="tab-icon">👤</span>
+      <span class="tab-label">我的</span>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ========== Tab切换 ==========
+    function switchTab(name, el) {
+      // 隐藏所有页面
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // 显示目标页面
+      document.getElementById('page-' + name).classList.add('active');
+      // 更新Tab状态
+      document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      // 滚动到顶部
+      window.scrollTo(0, 0);
+    }
+
+    // ========== 折叠/展开 ==========
+    function toggleSection(header) {
+      var body = header.nextElementSibling;
+      var arrow = header.querySelector('.rule-arrow');
+      if (body.classList.contains('open')) {
+        body.classList.remove('open');
+        arrow.classList.remove('open');
+      } else {
+        body.classList.add('open');
+        arrow.classList.add('open');
+      }
+    }
+
+    // ========== 复制链接 ==========
+    function copyLink(url) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function() {
+          showToast('链接已复制到剪贴板，请粘贴到微信聊天中打开');
+        }).catch(function() {
+          fallbackCopy(url);
+        });
+      } else {
+        fallbackCopy(url);
+      }
+    }
+
+    function fallbackCopy(text) {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast('链接已复制到剪贴板，请粘贴到微信聊天中打开');
+      } catch (e) {
+        showToast('复制失败，请手动复制链接');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // ========== WPS表单链接 ==========
+    var WPS_URL_MAP = {
+      'nVuE6fng': 'https://f.wps.cn/g/nVuE6fng/',
+      'YjzS2MMn': 'https://f.wps.cn/g/YjzS2MMn/',
+      'AIVTHGjm': 'https://f.wps.cn/g/AIVTHGjm/'
+    };
+
+    function openWpsLink(formId, name) {
+      var url = WPS_URL_MAP[formId] || '';
+      if (url) {
+        // 在H5中直接跳转，避免弹窗拦截
+        window.location.href = url;
+      } else {
+        showToast('链接暂不可用');
+      }
+    }
+
+    // ========== Toast提示 ==========
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // ========== 倒计时 ==========
+    var DEADLINES = {
+      plan: new Date('2026-09-20T23:59:59').getTime(),
+      protect: new Date('2026-11-01T23:59:59').getTime(),
+      speak: new Date('2026-11-01T23:59:59').getTime()
+    };
+
+    function formatRemain(ms) {
+      if (ms <= 0) return '已截止';
+      var d = Math.floor(ms / (1000 * 60 * 60 * 24));
+      var h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      if (d > 0) return '还剩 ' + d + ' 天 ' + h + ' 小时';
+      return '还剩 ' + h + ' 小时';
+    }
+
+    function calcRemain() {
+      var now = Date.now();
+      var planEl = document.getElementById('plan-remain');
+      var protectEl = document.getElementById('protect-remain');
+      var speakEl = document.getElementById('speak-remain');
+      if (planEl) planEl.textContent = formatRemain(DEADLINES.plan - now);
+      if (protectEl) protectEl.textContent = formatRemain(DEADLINES.protect - now);
+      if (speakEl) speakEl.textContent = formatRemain(DEADLINES.speak - now);
+    }
+
+    // 初始化
+    calcRemain();
+    setInterval(calcRemain, 60000);
+  </script>
+</body>
+</html>
