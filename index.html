@@ -146,6 +146,15 @@
       text-indent: 2em;
     }
 
+    .intro-text .intro-p {
+      text-indent: 2em;
+    }
+
+    .history-text .intro-p,
+    .section-card:last-of-type .intro-p {
+      text-indent: 0;
+    }
+
     .intro-logo {
       width: 160px;
       display: block;
@@ -188,9 +197,18 @@
 
     .past-photo {
       width: 100%;
-      height: 160px;
+      height: auto;
+      max-height: 200px;
       display: block;
       object-fit: cover;
+      border-radius: 0;
+    }
+
+    @media (min-width: 768px) {
+      .past-photo {
+        max-height: 300px;
+        object-fit: contain;
+      }
     }
 
     .past-content { padding: 12px; }
@@ -910,9 +928,9 @@
     <!-- 全国美境行动 -->
     <div class="section-card">
       <div class="section-title">全国美境行动</div>
-      <span class="intro-p">2026年度全国美境行动通知暂未公布，敬请关注。</span>
-      <a class="link-btn" href="https://naturesch.cn/indexController.do?mjxdInfoJs" target="_blank" style="text-decoration:none;display:block;">
-        <span class="link-btn-text">访问全国美境行动</span>
+      <span class="intro-p">2026年度全国美境行动通知暂未公布，敬请关注。广东省的参赛作品需参加片区初评，并由片区推荐后方可参加全国评选。</span>
+      <a class="link-btn" href="https://naturesch.cn/indexController.do?mjxdInfo" target="_blank" style="text-decoration:none;display:block;">
+        <span class="link-btn-text">点击查看全国美境行动通知</span>
       </a>
     </div>
   </div>
@@ -1227,7 +1245,7 @@
         <img class="user-avatar" src="images/logo-mj.png" alt="头像">
       </div>
       <span class="user-name">美境行动参与者</span>
-      <span class="user-desc">美境行动信息平台</span>
+      <span class="user-desc">广东省美境行动小助手</span>
     </div>
 
     <!-- 我的提交记录 -->
